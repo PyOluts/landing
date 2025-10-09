@@ -15,7 +15,22 @@ body {
   color: #fff;
   line-height: 1.5;
 }
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+}
 
+.burger span {
+  width: 26px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
 /* ================== Контейнер ================== */
 .container {
   max-width: 1200px;
@@ -543,12 +558,14 @@ body {
 .blog-grid {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap; /* ✅ разрешаем перенос */
   gap: 30px;
-  flex-wrap: nowrap;
+  max-width: 1200px; /* ✅ ограничиваем ширину */
+  margin: 0 auto; /* центрируем */
 }
 
 .blog-item {
-  width: 424px;
+  width: 350px; /* ✅ чуть меньше, чтобы влезали */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -556,20 +573,19 @@ body {
 }
 
 .empty-box {
-  width: 424px;
-  height: 315px;
+  width: 100%;
+  height: 250px;
   background: #fff;
   border-radius: 8px;
-  opacity: 1;
   margin-bottom: 20px;
 }
 
 .blog-item img {
-  width: 300px;
+  width: 100%;
   height: auto;
-  object-fit: contain;
+  object-fit: cover;
   margin-bottom: 15px;
-  align-self: left;
+  border-radius: 6px;
 }
 
 .blog-item h3 {
@@ -583,6 +599,7 @@ body {
   color: #ccc;
   line-height: 1.4;
 }
+
 
 
 /* ================== NEWSLETTER ================== */
@@ -797,7 +814,7 @@ body {
   font-size: 14px;
 }
 
-/* ================== АДАПТИВ ================== */
+
 /* ================== АДАПТИВ ДЛЯ IPHONE 14 PRO ================== */
 @media (max-width: 430px) {
   /* ================== HEADER ================== */
@@ -832,6 +849,7 @@ body {
 
   .header__text {
     max-width: 100%;
+    z-index: 2;
   }
 
   .header__image {
@@ -855,6 +873,15 @@ body {
   .header__content-text {
     font-size: 14px;
   }
+  .header__image {
+  position: absolute;
+  top: 60%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+  width: 250px; /* фиксированная ширина */
+}
 
   /* ================== BANNER ================== */
   .banner {
@@ -862,6 +889,8 @@ body {
     height: auto;
     gap: 20px;
     padding: 30px 10px;
+    align-items: center;     
+    text-align: center; 
   }
 
   .about-me {
@@ -880,6 +909,55 @@ body {
     flex-direction: column;
     gap: 10px;
   }
+  /* ================== BURGER ================== */
+  .burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    margin-left: 20px;
+    z-index: 200;
+  }
+
+  .burger span {
+    width: 26px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* скрываем меню */
+  .menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 15px;
+    background: #1b1d34;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: right;
+    z-index: 150;
+  }
+
+  /* показываем, когда активно */
+  .menu.active {
+    display: flex;
+  }
+
+  /* Анимация крестика */
+  .burger.active span:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+  }
+  .burger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .burger.active span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+  }
+
 
 /* ================== PORTFOLIO ADAPTIVE ================== */
 @media (max-width: 430px) {
@@ -995,15 +1073,20 @@ body {
 
 
   /* ================== TESTIMONIALS ================== */
-  .testimonials-grid {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  }
+.testimonials-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 
-  .testimonial-card-wrapper {
-    max-width: 90%;
-  }
+  padding: 40px 0; /* отступ сверху и снизу */
+}
+
+.testimonial-card-wrapper {
+  max-width: 90%;
+  margin-bottom: 70Px; /* добавь место под аватарку */
+}
+
 
   /* ================== BLOG ================== */
 @media (max-width: 430px) {
